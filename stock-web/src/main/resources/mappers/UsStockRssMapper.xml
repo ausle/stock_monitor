@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asule.stockmonitor.mapper.UsStockRssMapper">
+  <resultMap id="BaseResultMap" type="com.asule.stockmonitor.bean.UsStockRss">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="stock_code" jdbcType="VARCHAR" property="stockCode" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="title_zh" jdbcType="VARCHAR" property="titleZh" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="pub_date_gmt" jdbcType="TIMESTAMP" property="pubDateGmt" />
+    <result column="pub_date_bj" jdbcType="TIMESTAMP" property="pubDateBj" />
+    <result column="tags" jdbcType="VARCHAR" property="tags" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, stock_code, title, title_zh, link, pub_date_gmt, pub_date_bj, tags
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from us_stock_rss
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from us_stock_rss
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.asule.stockmonitor.bean.UsStockRss" useGeneratedKeys="true">
+    insert into us_stock_rss (stock_code, title, title_zh, 
+      link, pub_date_gmt, pub_date_bj, 
+      tags)
+    values (#{stockCode,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{titleZh,jdbcType=VARCHAR}, 
+      #{link,jdbcType=VARCHAR}, #{pubDateGmt,jdbcType=TIMESTAMP}, #{pubDateBj,jdbcType=TIMESTAMP}, 
+      #{tags,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.asule.stockmonitor.bean.UsStockRss" useGeneratedKeys="true">
+    insert into us_stock_rss
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stockCode != null">
+        stock_code,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="titleZh != null">
+        title_zh,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="pubDateGmt != null">
+        pub_date_gmt,
+      </if>
+      <if test="pubDateBj != null">
+        pub_date_bj,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stockCode != null">
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titleZh != null">
+        #{titleZh,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="pubDateGmt != null">
+        #{pubDateGmt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pubDateBj != null">
+        #{pubDateBj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.asule.stockmonitor.bean.UsStockRss">
+    update us_stock_rss
+    <set>
+      <if test="stockCode != null">
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="titleZh != null">
+        title_zh = #{titleZh,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="pubDateGmt != null">
+        pub_date_gmt = #{pubDateGmt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pubDateBj != null">
+        pub_date_bj = #{pubDateBj,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.asule.stockmonitor.bean.UsStockRss">
+    update us_stock_rss
+    set stock_code = #{stockCode,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      title_zh = #{titleZh,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      pub_date_gmt = #{pubDateGmt,jdbcType=TIMESTAMP},
+      pub_date_bj = #{pubDateBj,jdbcType=TIMESTAMP},
+      tags = #{tags,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
